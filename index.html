@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="three.min.js"></script>
+		<script src="OrbitControls.js"></script>
+		<script src='threex.keyboardstate.js'></script>
+		<script src="materials.js"></script>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100%; }
+		</style>
+	</head>
+	<body>
+		<script>
+
+			var keyboard	= new THREEx.KeyboardState();
+
+			var scene = new THREE.Scene();
+			scene.background = new THREE.Color(0x21252d);
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			//var controls = new THREE.OrbitControls( camera );
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			document.body.appendChild(renderer.domElement);
+
+			var colliders = [];
+			var walls = [];
+
+			camera.position.z = 4;
+			camera.position.y = 5;
+			camera.position.x = -4;
+			camera.lookAt(new THREE.Vector3(0,0,0));
+			//controls.update();
+
+		</script>
+		<script src="objects.js"></script>
+		<script src="chicken.js"></script>
+		<script src="player.js"></script>
+		<script src="zombieMovement.js"></script>
+		<script>
+			chickenAnimation();
+			function animate() {
+				requestAnimationFrame( animate );
+				//controls.update();
+				//cameraAnimation();
+				zombieAnimation();
+				if (moveToCenter)
+					getToSpecificPoint();
+				if (elevatorMoving)
+					moveElevator();
+				if (flapWings)
+					wingsOscilation();
+				renderer.render( scene, camera );
+			}
+			animate();
+
+			var cameraYSpeed = 0.025;
+
+			//function cameraAnimation() {
+			//	if (keyboard.pressed("left")) {
+			//		rotateAboutPoint(camera, new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0), -cameraYSpeed*100 *(Math.PI / 180));
+			//		camera.lookAt(new THREE.Vector3(0,0,0));
+			//	}
+			//	if (keyboard.pressed("right")) {
+			//		rotateAboutPoint(camera, new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0), cameraYSpeed*100 *(Math.PI / 180));
+			//		camera.lookAt(new THREE.Vector3(0,0,0));
+			//	}
+			//}
+		</script>
+	</body>
+</html>
